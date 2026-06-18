@@ -1,0 +1,19 @@
+#include <stdio.h>
+#define N 5
+
+int main()
+{
+    int i;
+
+    for(i = 0; i < N; i++)
+    {
+        printf("Philosopher %d is Thinking\n", i);
+        printf("Philosopher %d takes Fork %d and Fork %d\n",
+               i, i, (i + 1) % N);
+        printf("Philosopher %d is Eating\n", i);
+        printf("Philosopher %d puts down Fork %d and Fork %d\n\n",
+               i, i, (i + 1) % N);
+    }
+
+    return 0;
+}

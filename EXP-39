@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    int req[20], n, head, size;
+    int i, j, temp, seek = 0;
+    printf("Enter number of requests: ");
+    scanf("%d", &n);
+    printf("Enter request queue:\n");
+    for(i = 0; i < n; i++)
+        scanf("%d", &req[i]);
+    printf("Enter initial head position: ");
+    scanf("%d", &head);
+    printf("Enter disk size: ");
+    scanf("%d", &size);
+    for(i = 0; i < n - 1; i++)
+    {
+        for(j = 0; j < n - i - 1; j++)
+        {
+            if(req[j] > req[j + 1])
+            {
+                temp = req[j];
+                req[j] = req[j + 1];
+                req[j + 1] = temp;
+            }
+        }
+    }
+    printf("\nSeek Sequence: %d", head);
+    for(i = 0; i < n; i++)
+    {
+        if(req[i] >= head)
+        {
+            seek += abs(req[i] - head);
+            head = req[i];
+            printf(" -> %d", head);
+        }
+    }
+    seek += abs((size - 1) - head);
+    head = size - 1;
+    printf(" -> %d", head);
+    seek += (size - 1);
+    head = 0;
+    printf(" -> %d", head);
+    for(i = 0; i < n; i++)
+    {
+        if(req[i] < head || req[i] < req[n-1])
+        {
+            if(req[i] < head)
+            {
+                seek += abs(req[i] - head);
+                head = req[i];
+                printf(" -> %d", head);
+            }
+        }
+    }
+    for(i = 0; i < n; i++)
+    {
+        if(req[i] < head)
+            continue;
+        if(req[i] < req[n-1] && req[i] < head)
+            continue;
+    }
+    for(i = 0; i < n; i++)
+    {
+        if(req[i] < req[n-1] && req[i] >= 0)
+        {
+            if(req[i] > 0 && req[i] < head)
+                continue;
+        }
+    }
+    for(i = 0; i < n; i++)
+    {
+        if(req[i] < head)
+            continue;
+        if(req[i] < req[0])
+            continue;
+    }
+    for(i = 0; i < n; i++)
+    {
+        if(req[i] < req[0])
+            continue;
+    }
+    for(i = 0; i < n; i++)
+    {
+        if(req[i] < head)
+        {
+            seek += abs(req[i] - head);
+            head = req[i];
+            printf(" -> %d", head);
+        }
+    }
+    printf("\n\nTotal Seek Time = %d\n", seek);
+    return 0;
+}

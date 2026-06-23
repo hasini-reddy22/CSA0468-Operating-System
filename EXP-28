@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    FILE *fp;
+    char filename[20], line[100], word[20];
+    int lineNo = 1, found = 0;
+
+    printf("Enter file name: ");
+    scanf("%s", filename);
+
+    fp = fopen(filename, "r");
+
+    if (fp == NULL)
+    {
+        printf("File not found.\n");
+        return 1;
+    }
+
+    printf("Enter word to search: ");
+    scanf("%s", word);
+
+    while (fgets(line, sizeof(line), fp))
+    {
+        if (strstr(line, word) != NULL)
+        {
+            printf("Line %d: %s", lineNo, line);
+            found = 1;
+        }
+        lineNo++;
+    }
+
+    if (!found)
+        printf("Word not found.\n");
+
+    fclose(fp);
+
+    return 0;
+}

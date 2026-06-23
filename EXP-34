@@ -1,0 +1,29 @@
+#include <stdio.h>
+int main()
+{
+    int n, i;
+    char file[20];
+
+    printf("Enter file name: ");
+    scanf("%s", file);
+
+    printf("Enter number of records: ");
+    scanf("%d", &n);
+
+    printf("\nRecords are stored sequentially:\n");
+
+    for(i = 1; i <= n; i++)
+    {
+        printf("Record %d stored at Block %d\n", i, i);
+    }
+
+    printf("\nAccessing Record %d:\n", n);
+
+    for(i = 1; i <= n; i++)
+    {
+        printf("Reading Record %d\n", i);
+    }
+
+    printf("\nRecord %d accessed successfully.\n", n);
+    return 0;
+}
